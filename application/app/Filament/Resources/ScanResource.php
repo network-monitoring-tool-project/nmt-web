@@ -14,7 +14,7 @@ class ScanResource extends Resource
 {
     protected static ?string $model = Scan::class;
     protected static ?string $navigationIcon = 'heroicon-o-collection';
-    protected static ?string $navigationGroup = 'Database';
+    protected static ?string $navigationGroup = 'NMT';
 
     public static function form(Form $form): Form
     {
@@ -23,16 +23,20 @@ class ScanResource extends Resource
                 Forms\Components\Select::make('status')
                     ->options([
                         'ok' => 'ok',
-                        'error' => 'error'
+                        'error' => 'error',
+                        'unset' => 'unset'
                     ])->required(),
-                Forms\Components\DateTimePicker::make('timestamp')->required(),
-                Forms\Components\Repeater::make('addresses')->schema([
-                    Forms\Components\TextInput::make('ip')->required(),
-                    Forms\Components\TextInput::make('mac')->required(),
-                    Forms\Components\TextInput::make('manufacturer')->required(),
-                    Forms\Components\Toggle::make('online')->required(),
-                ])
+                Forms\Components\DateTimePicker::make('timestamp')->minDate(now())->required(),
+                Forms\Components\Repeater::make('addresses')
+                    ->relationship()
+                    ->schema([
+                        Forms\Components\TextInput::make('ip')->required(),
+                        Forms\Components\TextInput::make('mac'),
+                        Forms\Components\TextInput::make('manufacturer'),
+                        Forms\Components\Toggle::make('online'),
+                    ])
                     ->createItemButtonLabel('Add Addresses to Scan')
+                    ->grid(1)
             ]);
     }
 
@@ -40,12 +44,26 @@ class ScanResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
-                Tables\Columns\TextColumn::make('status'),
-                Tables\Columns\TextColumn::make('timestamp'),
+                Tables\Columns\BadgeColumn::make('status')->enum([
+                    'ok' => 'ok',
+                    'error' => 'error',
+                    'unset' => 'unset'
+                ])->colors([
+                    'primary',
+                    'secondary' => 'draft',
+                    'warning' => 'unset',
+                    'success' => 'ok',
+                    'danger' => 'error',
+                ]),
+                Tables\Columns\TextColumn::make('timestamp')->dateTime()->sortable()
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('status')
+                    ->options([
+                        'ok' => 'ok',
+                        'error' => 'error',
+                        'unset' => 'unset'
+                    ])
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

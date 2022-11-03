@@ -16,7 +16,7 @@ class Scan extends Model
     ];
 
     protected $casts = [
-        'timestamp' => 'datetime',
+        'timestamp' => 'datetime'
     ];
 
     public function addresses(): HasMany

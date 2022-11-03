@@ -14,8 +14,8 @@ return new class extends Migration {
     {
         Schema::create('scans', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['ok', 'error']);
-            $table->dateTime('timestamp');
+            $table->enum('status', ['ok', 'error', 'unset'])->default('unset');
+            $table->dateTime('timestamp')->default(now());
             $table->timestamps();
         });
     }
