@@ -36,7 +36,6 @@ class ScanResource extends Resource
                         Forms\Components\Toggle::make('online'),
                     ])
                     ->createItemButtonLabel('Add Addresses to Scan')
-                    ->grid(1)
             ]);
     }
 
@@ -66,6 +65,7 @@ class ScanResource extends Resource
                     ])
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
