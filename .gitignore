@@ -1,3 +1,4 @@
 /.idea
 /scripts/docker/*.sh
 /vendor/
+/application/package-lock.json

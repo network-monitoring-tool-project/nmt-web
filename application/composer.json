@@ -17,10 +17,9 @@
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
         "pxlrbt/filament-environment-indicator": "^1.0",
-        "spatie/laravel-permission": "^5.5"
+        "doctrine/dbal": "^3.5"
     },
     "require-dev": {
-        "doctrine/dbal": "^3.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
