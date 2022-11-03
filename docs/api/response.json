@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "timestamp": 1667308194,
+  "description": {
+    "version": "1.0.0",
+    "authors": [
+      "Oliver",
+      "Tim",
+      "Marc",
+      "Aaron"
+    ]
+  },
+  "data": {
+    "addresses": [
+      {
+        "ip": "127.0.0.1",
+        "device": {
+          "mac": "A4-7F-6F-FF-8F-D5",
+          "manufacturer": "hp",
+          "online": true
+        }
+      }
+    ]
+  }
+}
+
