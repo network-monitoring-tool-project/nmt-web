@@ -14,7 +14,6 @@ class ScanResource extends Resource
 {
     protected static ?string $model = Scan::class;
     protected static ?string $navigationIcon = 'heroicon-o-collection';
-    protected static ?string $navigationGroup = 'NMT';
 
     public static function form(Form $form): Form
     {
@@ -33,7 +32,10 @@ class ScanResource extends Resource
                         Forms\Components\TextInput::make('ip')->required(),
                         Forms\Components\TextInput::make('mac'),
                         Forms\Components\TextInput::make('manufacturer'),
-                        Forms\Components\Toggle::make('online'),
+                        Forms\Components\Toggle::make('online')
+                            ->default(false)
+                            ->onIcon('heroicon-s-lightning-bolt')
+                            ->onColor('success'),
                     ])
                     ->createItemButtonLabel('Add Addresses to Scan')
             ]);
