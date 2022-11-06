@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('ip');
             $table->string('mac')->nullable();
             $table->string('manufacturer')->nullable();
-            $table->boolean('online')->default(false)->nullable();
+            $table->boolean('online')->nullable();
             $table->bigInteger('scan_id')->unsigned();
             $table->foreign('scan_id')->references('id')->on('scans')->onDelete('cascade');
             $table->timestamps();
