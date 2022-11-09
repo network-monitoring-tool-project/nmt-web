@@ -37,6 +37,7 @@ class UserResource extends Resource
                     ->maxLength(255)
                     ->dehydrateStateUsing(fn($state) => Hash::make($state))
                     ->dehydrated(fn($state) => filled($state))
+                    ->required(fn(string $context): bool => $context === 'create')
             ]);
     }
 
