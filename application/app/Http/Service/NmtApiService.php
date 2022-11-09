@@ -12,10 +12,11 @@ class NmtApiService
     {
         //FIXME (only for demo content)
         $dbId = intval(Random::generate(3, '0-9'));
+        $status = [0 => 'unset', 1 => 'ok', 2 => 'error', 3 => 'running'];
 
         DB::table('scans')->insert([
             'id' => $dbId,
-            'status' => 'ok',
+            'status' => $status[intval(Random::generate(1, '0-3'))],
             'timestamp' => sprintf('%s', now()),
         ]);
 

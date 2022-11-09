@@ -9,6 +9,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Icetalker\FilamentTableRepeater\Forms\Components\TableRepeater;
 
 class ScanResource extends Resource
 {
@@ -28,18 +29,19 @@ class ScanResource extends Resource
                         'unset' => 'unset'
                     ])->required(),
                 Forms\Components\DateTimePicker::make('timestamp')->minDate(now())->required(),
-                Forms\Components\Repeater::make('addresses')
-                    ->relationship()
-                    ->schema([
-                        Forms\Components\TextInput::make('ip')->required(),
-                        Forms\Components\TextInput::make('mac'),
-                        Forms\Components\TextInput::make('manufacturer'),
-                        Forms\Components\Toggle::make('online')
-                            ->default(false)
-                            ->onIcon('heroicon-s-lightning-bolt')
-                            ->onColor('success'),
-                    ])
-                    ->createItemButtonLabel('Add Addresses to Scan')
+                Forms\Components\Grid::make(1)->schema([
+                    TableRepeater::make('addresses')
+                        ->relationship()
+                        ->schema([
+                            Forms\Components\TextInput::make('ip')->required(),
+                            Forms\Components\TextInput::make('mac'),
+                            Forms\Components\TextInput::make('manufacturer'),
+                            Forms\Components\Toggle::make('online')
+                                ->default(false)
+                                ->onIcon('heroicon-s-lightning-bolt')
+                                ->onColor('success'),
+                        ])
+                ]),
             ]);
     }
 
