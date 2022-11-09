@@ -47,4 +47,10 @@ class User extends Authenticatable implements FilamentUser
     {
         return true;
     }
+
+    public function getApiToken(): ?string
+    {
+        return $this->api_token;
+    }
+
 }

@@ -13,6 +13,7 @@ use Filament\Tables;
 class ScanResource extends Resource
 {
     protected static ?string $model = Scan::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     public static function form(Form $form): Form
@@ -23,6 +24,7 @@ class ScanResource extends Resource
                     ->options([
                         'ok' => 'ok',
                         'error' => 'error',
+                        'running' => 'running',
                         'unset' => 'unset'
                     ])->required(),
                 Forms\Components\DateTimePicker::make('timestamp')->minDate(now())->required(),
@@ -48,10 +50,11 @@ class ScanResource extends Resource
                 Tables\Columns\BadgeColumn::make('status')->enum([
                     'ok' => 'ok',
                     'error' => 'error',
+                    'running' => 'running',
                     'unset' => 'unset'
                 ])->colors([
                     'primary',
-                    'secondary' => 'draft',
+                    'secondary' => 'running',
                     'warning' => 'unset',
                     'success' => 'ok',
                     'danger' => 'error',
@@ -63,23 +66,30 @@ class ScanResource extends Resource
                     ->options([
                         'ok' => 'ok',
                         'error' => 'error',
+                        'running' => 'running',
                         'unset' => 'unset'
                     ])
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
+    public static function getRelations(): array
+    {
+        return [
+            //todo
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageScans::route('/'),
+            'index' => Pages\ListScans::route('/'),
+            'view' => Pages\ViewScan::route('/{record}')
         ];
     }
 }
