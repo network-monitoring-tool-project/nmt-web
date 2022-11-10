@@ -62,7 +62,7 @@ class ScanResource extends Resource
                     'danger' => 'error',
                 ]),
                 Tables\Columns\TextColumn::make('timestamp')->dateTime()->sortable()
-            ])
+            ])->defaultSort('timestamp', 'desc')
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->options([
